@@ -131,7 +131,8 @@ export default function MenuPaket({ navigation, route }) {
                             <TouchableOpacity onPress={() => navigation.navigate('MenuJadwal', {
                                 transmisi: route.params.transmisi,
                                 kelas: route.params.kelas,
-                                paket: item.name
+                                paket: item.name,
+                                hari: 'Senin & Kamis'
                             })} style={{
                                 flex: 1,
                                 marginVertical: 10,

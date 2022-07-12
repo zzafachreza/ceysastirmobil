@@ -7,12 +7,12 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-import {fonts} from '../../utils/fonts';
+import { fonts } from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
-import {MyButton} from '../../components';
-import {colors} from '../../utils/colors';
+import { MyButton } from '../../components';
+import { colors } from '../../utils/colors';
 
-export default function Success({navigation, route}) {
+export default function Success({ navigation, route }) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const txt = new Animated.Value(-windowWidth);
@@ -24,6 +24,7 @@ export default function Success({navigation, route}) {
   }).start();
 
   const messege = route.params.messege;
+  const tipe = route.params.tipe;
   return (
     <SafeAreaView
       style={{
@@ -56,12 +57,14 @@ export default function Success({navigation, route}) {
           //   flex: 1,
           padding: 10,
         }}>
-        <MyButton
+
+        {route.params.tipe !== "BOOKING" && <MyButton
           title="MASUK SEKARANG"
           warna={colors.primary}
           Icons="log-in"
           onPress={() => navigation.replace('Login')}
-        />
+        />}
+
       </View>
     </SafeAreaView>
   );
