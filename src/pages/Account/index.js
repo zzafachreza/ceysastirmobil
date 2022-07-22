@@ -67,7 +67,7 @@ export default function Account({ navigation, route }) {
             title="Edit Profile"
             colorText={colors.white}
             iconColor={colors.white}
-            warna={colors.secondary}
+            warna={colors.primary}
             Icons="create-outline"
           />
 
@@ -141,28 +141,7 @@ export default function Account({ navigation, route }) {
                 {user.telepon}
               </Text>
             </View>
-            <View
-              style={{
-                marginVertical: 3,
-                padding: 10,
-                backgroundColor: colors.white,
-                borderRadius: 10,
-              }}>
-              <Text
-                style={{
-                  fontFamily: fonts.secondary[600],
-                  color: colors.black,
-                }}>
-                Kota - Provinsi
-              </Text>
-              <Text
-                style={{
-                  fontFamily: fonts.secondary[400],
-                  color: colors.primary,
-                }}>
-                {user.nama_kota} - {user.nama_provinsi}
-              </Text>
-            </View>
+
             <View
               style={{
                 marginVertical: 3,
@@ -200,7 +179,7 @@ export default function Account({ navigation, route }) {
             title="Keluar"
             colorText={colors.white}
             iconColor={colors.white}
-            warna={colors.primary}
+            warna={colors.black}
             Icons="log-out-outline"
           />
         </View>

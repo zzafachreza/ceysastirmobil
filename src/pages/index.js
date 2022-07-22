@@ -47,6 +47,9 @@ import Kuis from './Kuis';
 import MenuKelas from './MenuKelas';
 import MenuPaket from './MenuPaket';
 import MenuJadwal from './MenuJadwal';
+import MenuJadwal4 from './MenuJadwal4';
+import MenuJadwal6 from './MenuJadwal6';
+import MenuJadwal8 from './MenuJadwal8';
 
 
 
@@ -108,5 +111,8 @@ export {
   MenuKelas,
 
   MenuPaket,
-  MenuJadwal
+  MenuJadwal,
+  MenuJadwal4,
+  MenuJadwal6,
+  MenuJadwal8
 };

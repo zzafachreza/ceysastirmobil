@@ -58,6 +58,9 @@ import {
   MenuKelas,
   MenuPaket,
   MenuJadwal,
+  MenuJadwal4,
+  MenuJadwal6,
+  MenuJadwal8,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -71,7 +74,7 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Whatsapp" component={Wa} />
+      {/* <Tab.Screen name="Whatsapp" component={Wa} /> */}
       <Tab.Screen name="History" component={ListData} />
 
       {/* <Tab.Screen name="Notifikasi" component={Notifikasi} /> */}
@@ -119,6 +122,30 @@ export default function Router() {
       <Stack.Screen
         name="MenuJadwal"
         component={MenuJadwal}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuJadwal4"
+        component={MenuJadwal4}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuJadwal6"
+        component={MenuJadwal6}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuJadwal8"
+        component={MenuJadwal8}
         options={{
           headerShown: false,
         }}

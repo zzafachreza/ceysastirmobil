@@ -70,35 +70,29 @@ export default function ({ navigation, route }) {
           <Text
             style={{
               flex: 1,
-              fontSize: windowWidth / 30,
+              fontSize: windowWidth / 35,
               color: colors.primary,
               fontFamily: fonts.secondary[600],
             }}>
             {item.kode}
           </Text>
+
+
+        </View>
+        <View style={{
+          // flex: 1,
+        }}>
           <Text
             style={{
               flex: 1,
-              fontSize: windowWidth / 30,
+              fontSize: windowWidth / 35,
               color: colors.black,
               fontFamily: fonts.secondary[600],
             }}>
             {item.tanggal}
           </Text>
-        </View>
-        <View style={{
-          flex: 1,
-        }}>
-          <Text
-            style={{
-              fontSize: windowWidth / 35,
-              // color: colors.white,
-              textAlign: 'center',
-              color: colors.success,
-              fontFamily: fonts.secondary[600],
-            }}>
-            {item.status}
-          </Text>
+
+
         </View>
       </View>
 
@@ -114,26 +108,32 @@ export default function ({ navigation, route }) {
           style={{
             flex: 1,
           }}>
-          <Text style={{
-            fontSize: windowWidth / 30,
-            fontFamily: fonts.secondary[400],
-            color: colors.black,
-          }}>Opsi Pengiriman</Text>
+
           <Text
             style={{
-              fontSize: windowWidth / 30,
+              fontSize: windowWidth / 35,
               fontFamily: fonts.secondary[600],
               color: colors.black,
             }}>
-            {item.nama_kurir}
+            {item.kelas}
           </Text>
           <Text
             style={{
-              fontSize: windowWidth / 30,
+              fontSize: windowWidth / 35,
               fontFamily: fonts.secondary[600],
-              color: colors.primary,
+              color: colors.black,
             }}>
             {item.paket}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: windowWidth / 35,
+              fontFamily: fonts.secondary[600],
+              color: colors.black,
+
+            }}>
+            {item.transmisi}
           </Text>
 
         </View>
@@ -145,20 +145,30 @@ export default function ({ navigation, route }) {
             flex: 1,
           }}>
 
-          <Text style={{
-            fontSize: windowWidth / 30,
-            fontFamily: fonts.secondary[400],
-            color: colors.black,
-          }}>Total Pembayaran</Text>
           <Text
             style={{
-              fontSize: windowWidth / 20,
+              fontSize: windowWidth / 35,
               fontFamily: fonts.secondary[600],
-              color: colors.black,
+              backgroundColor: colors.primary,
+              padding: 5,
+              color: colors.white,
             }}>
-            Rp. {new Intl.NumberFormat().format(item.total_bayar)}
+            {item.hari}
           </Text>
-
+          <Text
+            style={{
+              fontSize: windowWidth / 50,
+              textAlign: 'center',
+              maxWidth: 60,
+              borderRadius: 3,
+              marginTop: 5,
+              padding: 2,
+              color: colors.white,
+              backgroundColor: item.status == "DRAF" ? colors.danger : colors.success,
+              fontFamily: fonts.secondary[600],
+            }}>
+            {item.status}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

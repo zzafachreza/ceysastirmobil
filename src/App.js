@@ -14,8 +14,8 @@ export default function App() {
 
   PushNotification.createChannel(
     {
-      channelId: 'witraguna', // (required)
-      channelName: 'witraguna', // (required)
+      channelId: 'ceysastirmobil', // (required)
+      channelName: 'ceysastirmobil', // (required)
       channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
       playSound: true, // (optional) default: true
       soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function

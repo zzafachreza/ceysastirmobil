@@ -26,48 +26,38 @@ import { Icon } from 'react-native-elements';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars';
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
-
-export default function MenuJadwal({ navigation, route }) {
-
-    var __jam = route.params.jam_pertemuan;
-
+import LottieView from 'lottie-react-native';
+export default function MenuJadwal4({ navigation, route }) {
+    const [loading0, setLoading0] = useState(true);
     const [pilihhari, setpilihhari] = useState({
         1: true,
         2: false,
         3: false,
     });
-
     const [kirim, setKirim] = useState(route.params);
     const [loading, setLoading] = useState(false);
+    const [booking, setBooking] = useState([]);
+
+
     const sendServer = () => {
-
-        setKirim({
-            ...kirim,
-            jam_pertemuan: __jam
-        });
-
+        console.log(kirim)
         setLoading(true);
         setTimeout(() => {
-            console.log(kirim)
-            // navigation.navigate('Success', {
-            //     messege: 'Booking Jadwal Kamu sedang di proses',
-            //     tipe: 'BOOKING'
-            // })
-            setLoading(false)
+
+            axios.post(urlAPI + '/1add_transaksi.php', kirim)
+                .then(res => {
+                    console.log(res.data);
+                    setLoading(false);
+                    navigation.navigate('Success', {
+                        messege: 'Booking Jadwal Kamu sedang di proses',
+                        tipe: 'BOOKING'
+                    })
+                })
         }, 1200)
 
 
-        // setLoading(true);
-        // setTimeout(() => {
-        //     navigation.navigate('Success', {
-        //         messege: 'Booking Jadwal Kamu sedang di proses',
-        //         tipe: 'BOOKING'
-        //     })
-        //     setLoading(false)
-        // }, 1200)
+
     }
-
-
 
     LocaleConfig.locales['id'] = {
         monthNames: [
@@ -89,35 +79,35 @@ export default function MenuJadwal({ navigation, route }) {
         dayNamesShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
         today: "Jumat"
     };
-
     LocaleConfig.defaultLocale = 'id';
 
     const getDaysInMonth = (month, year, days) => {
         let pivot = moment().month(month).year(year).startOf('month')
-        const end = moment().month(month).year(year).endOf('year');
+        const end = moment().month(month + 3).year(year).endOf('month');
 
 
         let dates = {}
         const disabled = { disabled: true }
+
         while (pivot.isBefore(end)) {
             days.forEach((day) => {
                 dates[pivot.day(day).format("YYYY-MM-DD")] = disabled
             })
             pivot.add(7, 'days')
         }
+        axios.post('https://ceysa.zavalabs.com/api/1booked.php').then(res => {
+            console.warn(res.data);
+            res.data.map(i => {
+                dates[i.tanggal] = disabled
+            });
+            setLoading0(false)
+        })
 
         return dates
     }
 
-
-    // const DISABLED_DAYS = ['Saturday', 'Sunday', 'Tuesday ', 'Thursday', 'Friday']
-
     const [markedDates, setMarkedDates] = useState(getDaysInMonth(moment().month(), moment().year(), kirim.tutup))
-
-
     const INITIAL_DATE = moment().format('YYYY-MM-DD');
-
-
     const jam = [
         {
             label: '08:00 - 09.30',
@@ -147,100 +137,7 @@ export default function MenuJadwal({ navigation, route }) {
 
     ]
 
-
-    const __ubahjam = (x, i) => {
-        // console.log('jam', x)
-        __jam[i] = x
-        console.warn('jam isi', __jam)
-
-        // setJam(arr);
-
-
-    }
-
-    const MyJadwal = ({ nilai }) => {
-        var myBintang = [];
-
-        for (let i = 0; i < nilai; i++) {
-            var ZVL_NOMOR = i;
-            myBintang.push(
-                <View key={i} style={{
-                    marginBottom: 10,
-                }}>
-                    <Text style={{
-                        padding: 10,
-                        fontFamily: fonts.secondary[600],
-                        backgroundColor: colors.secondary,
-                        color: colors.primary
-                    }}>Pertemuan Ke {i + 1}</Text>
-                    {/* <Calendar
-                        enableSwipeMonths
-                        current={INITIAL_DATE}
-                        style={{
-                            margin: 10,
-                        }}
-                        onDayPress={
-
-
-                            d => {
-                                console.log(d.dateString);
-
-                                // setKirim({
-                                //     ...kirim,
-                                //     pertemuan: [...kirim.pertemuan, d.dateString]
-                                // })
-
-                                const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                // console.warn(zvl)
-                                setMarkedDates(zvl)
-                            }
-                        }
-                        markedDates={markedDates}
-                    /> */}
-                    <MyPicker onValueChange={(x) => {
-                        // console.log(x);
-                        var z = x;
-
-                        __ubahjam(z, i)
-
-                    }} label="Waktu belajar" data={[
-                        {
-                            label: 'silahkan pilih jam',
-                            value: '08.00 - 09.30'
-                        },
-                        {
-                            label: '08.00 - 09.30',
-                            value: '08.00 - 09.30',
-                        },
-                        {
-                            label: '09.30 - 11.00',
-                            value: '09.30 - 11.00',
-                        },
-                        {
-                            label: '11.00 - 12.30',
-                            value: '11.00 - 12.30',
-                        },
-                        {
-                            label: '13.30 - 15.00',
-                            value: '13.30 - 15.00',
-                        },
-                        {
-                            label: '15.00 - 16.30',
-                            value: '15.00 - 16.30',
-                        },
-                        {
-                            label: '16.30 - 18.00',
-                            value: '16.30 - 18.00',
-                        },
-
-
-                    ]} />
-                </View>,
-            );
-        }
-
-        return <>{myBintang}</>;
-    };
+    // console.log('disable', markedDates);
 
     return (
         <SafeAreaView style={{
@@ -462,8 +359,180 @@ export default function MenuJadwal({ navigation, route }) {
 
 
                 <ScrollView>
-                    {/* <MyJadwal nilai={kirim.jumlah} /> */}
-                    <MyJadwal nilai={2} />
+
+                    {/* pertemuan 1 */}
+                    <View style={{
+                        marginBottom: 10,
+                    }}>
+                        <Text style={{
+                            padding: 10,
+                            fontFamily: fonts.secondary[600],
+                            backgroundColor: colors.secondary,
+                            color: colors.primary
+                        }}>Pertemuan Ke 1 </Text>
+                        <Calendar
+                            enableSwipeMonths
+                            current={INITIAL_DATE}
+                            style={{
+                                margin: 10,
+                            }}
+                            onDayPress={
+
+
+                                d => {
+                                    var __tanggal = kirim.tanggal_pertemuan;
+                                    __tanggal[0] = d.dateString
+                                    setKirim({
+                                        ...kirim,
+                                        tanggal_pertemuan: __tanggal
+                                    })
+                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+
+
+                                    setMarkedDates(zvl)
+                                }
+                            }
+                            markedDates={markedDates}
+                        />
+                        <MyPicker onValueChange={(x) => {
+                            var __jam = kirim.jam_pertemuan;
+                            __jam[0] = x
+                            setKirim({
+                                ...kirim,
+                                jam_pertemuan: __jam
+                            })
+                        }} label="Waktu belajar" data={jam} />
+                    </View>
+
+                    {/* pertemuan 2 */}
+                    <View style={{
+                        marginBottom: 10,
+                    }}>
+                        <Text style={{
+                            padding: 10,
+                            fontFamily: fonts.secondary[600],
+                            backgroundColor: colors.secondary,
+                            color: colors.primary
+                        }}>Pertemuan Ke 2 </Text>
+                        <Calendar
+                            enableSwipeMonths
+                            current={INITIAL_DATE}
+                            style={{
+                                margin: 10,
+                            }}
+                            onDayPress={
+
+
+                                d => {
+                                    var __tanggal = kirim.tanggal_pertemuan;
+                                    __tanggal[1] = d.dateString
+                                    setKirim({
+                                        ...kirim,
+                                        tanggal_pertemuan: __tanggal
+                                    })
+                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+                                    setMarkedDates(zvl)
+                                }
+                            }
+                            markedDates={markedDates}
+                        />
+                        <MyPicker onValueChange={(x) => {
+                            var __jam = kirim.jam_pertemuan;
+                            __jam[1] = x
+                            setKirim({
+                                ...kirim,
+                                jam_pertemuan: __jam
+                            })
+                        }} label="Waktu belajar" data={jam} />
+                    </View>
+
+                    {/* pertemuan 3 */}
+                    <View style={{
+                        marginBottom: 10,
+                    }}>
+                        <Text style={{
+                            padding: 10,
+                            fontFamily: fonts.secondary[600],
+                            backgroundColor: colors.secondary,
+                            color: colors.primary
+                        }}>Pertemuan Ke 3 </Text>
+                        <Calendar
+                            enableSwipeMonths
+                            current={INITIAL_DATE}
+                            style={{
+                                margin: 10,
+                            }}
+                            onDayPress={
+
+
+                                d => {
+                                    var __tanggal = kirim.tanggal_pertemuan;
+                                    __tanggal[2] = d.dateString
+                                    setKirim({
+                                        ...kirim,
+                                        tanggal_pertemuan: __tanggal
+                                    })
+                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+                                    setMarkedDates(zvl)
+                                }
+                            }
+                            markedDates={markedDates}
+                        />
+                        <MyPicker onValueChange={(x) => {
+                            var __jam = kirim.jam_pertemuan;
+                            __jam[2] = x
+                            setKirim({
+                                ...kirim,
+                                jam_pertemuan: __jam
+                            })
+                        }} label="Waktu belajar" data={jam} />
+                    </View>
+
+                    {/* pertemuan 4 */}
+                    <View style={{
+                        marginBottom: 10,
+                    }}>
+                        <Text style={{
+                            padding: 10,
+                            fontFamily: fonts.secondary[600],
+                            backgroundColor: colors.secondary,
+                            color: colors.primary
+                        }}>Pertemuan Ke 4 </Text>
+                        <Calendar
+                            enableSwipeMonths
+                            current={INITIAL_DATE}
+                            style={{
+                                margin: 10,
+                            }}
+                            onDayPress={
+
+
+                                d => {
+                                    var __tanggal = kirim.tanggal_pertemuan;
+                                    __tanggal[3] = d.dateString
+
+                                    setKirim({
+                                        ...kirim,
+                                        tanggal_pertemuan: __tanggal
+                                    })
+                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+                                    setMarkedDates(zvl)
+                                }
+                            }
+                            markedDates={markedDates}
+                        />
+                        <MyPicker onValueChange={(x) => {
+                            var __jam = kirim.jam_pertemuan;
+                            __jam[3] = x
+
+                            setKirim({
+                                ...kirim,
+                                jam_pertemuan: __jam
+                            })
+                        }} label="Waktu belajar" data={jam} />
+                    </View>
+
+
                 </ScrollView>
 
 
@@ -473,6 +542,14 @@ export default function MenuJadwal({ navigation, route }) {
 
             </View>
 
+            {loading0 && (
+                <LottieView
+                    source={require('../../assets/animation.json')}
+                    autoPlay
+                    loop
+                    style={{ backgroundColor: colors.primary }}
+                />
+            )}
 
 
             {!loading && <MyButton onPress={sendServer} Icons="calendar-outline" radius={0} title="Booking Jadwal Sekarang" warna={colors.primary} />}

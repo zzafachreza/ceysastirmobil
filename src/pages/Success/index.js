@@ -25,6 +25,13 @@ export default function Success({ navigation, route }) {
 
   const messege = route.params.messege;
   const tipe = route.params.tipe;
+
+  if (route.params.tipe === "BOOKING") {
+    setTimeout(() => {
+      navigation.replace('MainApp')
+    }, 1700)
+  }
+
   return (
     <SafeAreaView
       style={{

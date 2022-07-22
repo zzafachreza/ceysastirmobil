@@ -20,36 +20,53 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import { useIsFocused } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
+import moment from 'moment';
+import LottieView from 'lottie-react-native';
 
 export default function MenuPaket({ navigation, route }) {
 
     // const [kirim, setKirim] = useState({});
+    const [loading, setLoading] = useState(false)
     // useState(() => {
     //     setKirim({
     //         ...kirim,
     //         transmisi: route.params.transmisi
     //     })
     // }, []);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        getData('user').then(user => {
+            setUser(user);
+        })
+
+    }, [])
 
     const data = [
 
         {
-            name: 'Paket Bisa Mahir 4x'
+            name: 'Paket Bisa Mahir 4x',
+            jumlah: 4,
         },
         {
-            name: 'Paket Bisa Mahir 4x + SIM'
+            name: 'Paket Bisa Mahir 4x + SIM',
+            jumlah: 4,
         },
         {
-            name: 'Paket Bisa Mahir 6x'
+            name: 'Paket Bisa Mahir 6x',
+            jumlah: 6,
         },
         {
-            name: 'Paket Bisa Mahir 6x + SIM'
+            name: 'Paket Bisa Mahir 6x + SIM',
+            jumlah: 6,
         },
         {
-            name: 'Paket Bisa Mahir 8x'
+            name: 'Paket Bisa Mahir 8x',
+            jumlah: 8,
         },
         {
-            name: 'Paket Bisa Mahir 8x + SIM'
+            name: 'Paket Bisa Mahir 8x + SIM',
+            jumlah: 8,
         },
 
     ];
@@ -59,16 +76,20 @@ export default function MenuPaket({ navigation, route }) {
 
 
         {
-            name: 'Paket Bisa Mahir 6x'
+            name: 'Paket Bisa Mahir 6x',
+            jumlah: 6,
         },
         {
-            name: 'Paket Bisa Mahir 6x + SIM'
+            name: 'Paket Bisa Mahir 6x + SIM',
+            jumlah: 6,
         },
         {
-            name: 'Paket Bisa Mahir 8x'
+            name: 'Paket Bisa Mahir 8x',
+            jumlah: 8,
         },
         {
-            name: 'Paket Bisa Mahir 8x + SIM'
+            name: 'Paket Bisa Mahir 8x + SIM',
+            jumlah: 8,
         },
 
     ];
@@ -128,19 +149,62 @@ export default function MenuPaket({ navigation, route }) {
                 {
                     route.params.kelas == 'REGULAR' && data.map(item => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('MenuJadwal', {
-                                transmisi: route.params.transmisi,
-                                kelas: route.params.kelas,
-                                paket: item.name,
-                                hari: 'Senin & Kamis'
-                            })} style={{
-                                flex: 1,
-                                marginVertical: 10,
-                                elevation: 1,
-                                backgroundColor: colors.white,
-                                borderBottomWidth: 5,
-                                borderBottomColor: colors.primary
-                            }}>
+                            <TouchableOpacity onPress={() => {
+
+
+                                setLoading(true);
+
+                                var __jam = [];
+                                var __tanggal = [];
+
+                                for (let z = 0; z < item.jumlah; z++) {
+                                    __jam.push('00.00 - 00.00');
+                                    __tanggal.push(moment().format('YYYY-MM-DD'));
+                                }
+
+                                var arr = {
+                                    fid_user: user.id,
+                                    transmisi: route.params.transmisi,
+                                    kelas: route.params.kelas,
+                                    paket: item.name,
+                                    jumlah: item.jumlah,
+                                    tanggal_pertemuan: __tanggal,
+                                    jam_pertemuan: __jam,
+                                    hari: 'Senin & Rabu',
+                                    tutup: ['Saturday', 'Sunday', 'Tuesday ', 'Thursday', 'Friday']
+                                };
+
+
+
+                                console.warn(arr);
+
+
+                                setTimeout(() => {
+
+
+                                    if (item.jumlah == 4) {
+                                        navigation.navigate('MenuJadwal4', arr)
+                                        setLoading(false);
+                                    } else if (item.jumlah == 6) {
+                                        navigation.navigate('MenuJadwal6', arr)
+                                        setLoading(false);
+                                    } else if (item.jumlah == 8) {
+                                        navigation.navigate('MenuJadwal8', arr)
+                                        setLoading(false);
+                                    }
+                                }, 1200)
+
+
+                            }}
+
+                                style={{
+                                    flex: 1,
+                                    marginVertical: 10,
+                                    elevation: 1,
+                                    backgroundColor: colors.white,
+                                    borderBottomWidth: 5,
+                                    borderBottomColor: colors.primary
+                                }}>
 
                                 <View style={{
                                     flex: 1,
@@ -173,11 +237,42 @@ export default function MenuPaket({ navigation, route }) {
                 {
                     route.params.kelas == 'VIP' && data2.map(item => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('MenuJadwal', {
-                                transmisi: route.params.transmisi,
-                                kelas: route.params.kelas,
-                                paket: item.name
-                            })} style={{
+                            <TouchableOpacity onPress={() => {
+
+
+                                var __jam = [];
+                                var __tanggal = [];
+
+                                for (let z = 0; z < item.jumlah; z++) {
+                                    __jam.push('00.00 - 00.00');
+                                    __tanggal.push(moment().format('YYYY-MM-DD'));
+                                }
+
+                                var arr = {
+                                    fid_user: user.id,
+                                    transmisi: route.params.transmisi,
+                                    kelas: route.params.kelas,
+                                    paket: item.name,
+                                    jumlah: item.jumlah,
+                                    tanggal_pertemuan: __tanggal,
+                                    jam_pertemuan: __jam,
+                                    hari: 'Senin & Rabu',
+                                    tutup: ['Saturday', 'Sunday', 'Tuesday ', 'Thursday', 'Friday']
+                                };
+
+
+
+                                console.warn(arr);
+
+                                if (item.jumlah == 4) {
+                                    navigation.navigate('MenuJadwal4', arr)
+                                } else if (item.jumlah == 6) {
+                                    navigation.navigate('MenuJadwal6', arr)
+                                } else if (item.jumlah == 8) {
+                                    navigation.navigate('MenuJadwal8', arr)
+                                }
+
+                            }} style={{
                                 flex: 1,
                                 marginVertical: 10,
                                 elevation: 1,
@@ -219,7 +314,14 @@ export default function MenuPaket({ navigation, route }) {
 
             </View>
 
-
+            {loading && (
+                <LottieView
+                    source={require('../../assets/animation.json')}
+                    autoPlay
+                    loop
+                    style={{ backgroundColor: colors.primary }}
+                />
+            )}
         </SafeAreaView >
     )
 }

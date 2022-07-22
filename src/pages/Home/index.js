@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
       const json = JSON.stringify(remoteMessage);
       const obj = JSON.parse(json);
 
-      // console.log(obj);
+      console.log(obj);
 
       // alert(obj.notification.title)
 
@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
 
       PushNotification.localNotification({
         /* Android Only Properties */
-        channelId: 'ceysastirhandal', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+        channelId: 'ceysastirmobil', // (required) channelId, if the channel doesn't exist, notification will not trigger.
         title: obj.notification.title, // (optional)
         message: obj.notification.body, // (required)
       });
