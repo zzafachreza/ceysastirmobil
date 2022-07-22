@@ -76,6 +76,15 @@ export default function ({ navigation, route }) {
             }}>
             {item.kode}
           </Text>
+          <Text
+            style={{
+              flex: 1,
+              fontSize: windowWidth / 35,
+              color: colors.black,
+              fontFamily: fonts.secondary[600],
+            }}>
+            Lokasi {item.lokasi}
+          </Text>
 
 
         </View>

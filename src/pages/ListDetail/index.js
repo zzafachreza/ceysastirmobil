@@ -165,7 +165,35 @@ export default function ListDetail({ navigation, route }) {
 
             }}>Informasi Kursus</Text>
 
+            <View style={{
+              flexDirection: 'row',
+              padding: 10,
+            }}>
+              <View style={{
+                flex: 0.5,
+                justifyContent: 'center'
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[400],
+                  fontSize: windowWidth / 30,
+                  color: colors.black,
 
+                }}>Lokasi</Text>
+              </View>
+              <View style={{
+                flex: 1.5,
+                justifyContent: 'flex-start',
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[400],
+                  fontSize: windowWidth / 30,
+                  color: colors.black,
+
+                }}>
+                  {item.lokasi}
+                </Text>
+              </View>
+            </View>
             <View style={{
               flexDirection: 'row',
               padding: 10,
@@ -311,12 +339,12 @@ export default function ListDetail({ navigation, route }) {
                   </View>
 
                   <View style={{
-                    // flex: 1,
+                    flex: 1,
                     justifyContent: 'center'
                   }}>
                     <Text style={{
                       padding: 2,
-                      width: 80,
+                      // width: 80,
                       textAlign: 'center',
                       fontFamily: fonts.secondary[600],
                       fontSize: windowWidth / 30,

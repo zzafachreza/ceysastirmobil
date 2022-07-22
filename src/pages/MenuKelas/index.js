@@ -52,7 +52,8 @@ export default function MenuKelas({ navigation, route }) {
                 flexDirection: 'column',
                 padding: 10,
             }}>
-                <TouchableOpacity onPress={() => navigation.navigate('MenuPaket', {
+
+                {route.params.transmisi == "MANUAL" && <TouchableOpacity onPress={() => navigation.navigate('MenuPaket', {
                     transmisi: route.params.transmisi,
                     kelas: 'REGULAR'
                 })} style={{
@@ -83,13 +84,14 @@ export default function MenuKelas({ navigation, route }) {
                             color: colors.white,
                         }}>(durasi 1½jam)</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity>}
+
 
                 <TouchableOpacity onPress={() => navigation.navigate('MenuPaket', {
                     transmisi: route.params.transmisi,
                     kelas: 'VIP'
                 })} style={{
-                    flex: 1,
+                    flex: route.params.transmisi == "MANUAL" ? 1 : 0.5,
                     marginVertical: 10,
                     elevation: 1,
                     backgroundColor: colors.primary

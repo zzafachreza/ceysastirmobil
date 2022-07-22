@@ -50,6 +50,7 @@ import MenuJadwal from './MenuJadwal';
 import MenuJadwal4 from './MenuJadwal4';
 import MenuJadwal6 from './MenuJadwal6';
 import MenuJadwal8 from './MenuJadwal8';
+import MenuTransmisi from './MenuTransmisi';
 
 
 
@@ -114,5 +115,6 @@ export {
   MenuJadwal,
   MenuJadwal4,
   MenuJadwal6,
-  MenuJadwal8
+  MenuJadwal8,
+  MenuTransmisi
 };

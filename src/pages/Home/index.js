@@ -7,17 +7,20 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Linking,
 } from 'react-native';
 import { colors } from '../../utils/colors';
 import { fonts } from '../../utils/fonts';
 import { storeData, getData, urlAPI } from '../../utils/localStorage';
 import MyCarouser from '../../components/MyCarouser';
 import axios from 'axios';
-import messaging from '@react-native-firebase/messaging';
-import PushNotification from 'react-native-push-notification';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
+import messaging from '@react-native-firebase/messaging';
+import PushNotification from 'react-native-push-notification';
+
 import { useIsFocused } from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
 
 export default function Home({ navigation }) {
   const [user, setUser] = useState({});
@@ -147,7 +150,7 @@ export default function Home({ navigation }) {
       <ScrollView>
         <View
           style={{
-            height: windowHeight / 9,
+            height: windowHeight / 12,
             padding: 10,
             marginBottom: 10,
             backgroundColor: colors.primary,
@@ -188,6 +191,7 @@ export default function Home({ navigation }) {
             />
           </View>
         </View>
+
         <MyCarouser />
 
 
@@ -195,9 +199,12 @@ export default function Home({ navigation }) {
           flex: 1,
           padding: 10,
         }}>
+
+
           <Text
             style={{
-              fontSize: windowWidth / 25,
+              marginVertical: 5,
+              fontSize: windowWidth / 30,
               color: colors.primary,
               fontFamily: fonts.secondary[400],
             }}>
@@ -207,7 +214,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity onPress={() => navigation.navigate('MenuKelas', {
             transmisi: 'MANUAL'
           })} style={{
-            marginVertical: 10,
+            marginVertical: 5,
             elevation: 1,
             flexDirection: 'row',
             backgroundColor: colors.secondary
@@ -239,7 +246,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity onPress={() => navigation.navigate('MenuKelas', {
             transmisi: 'MATIC'
           })} style={{
-            marginVertical: 10,
+            marginVertical: 5,
             elevation: 1,
             flexDirection: 'row',
             backgroundColor: colors.primary
@@ -264,6 +271,23 @@ export default function Home({ navigation }) {
                 color: colors.secondary,
               }}>MATIC</Text>
             </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/ceysakursusstirmobil/')} style={{
+            flexDirection: 'row',
+            flex: 1,
+            marginVertical: 5,
+            // backgroundColor: colors.primary,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <Icon type='ionicon' name='logo-instagram' size={windowWidth / 20} />
+            <Text style={{
+              fontSize: windowWidth / 20,
+              left: 3,
+              color: colors.black,
+              fontFamily: fonts.secondary[600],
+            }}>ceysakursusstirmobil</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

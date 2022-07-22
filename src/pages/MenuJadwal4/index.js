@@ -28,11 +28,16 @@ import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
 import LottieView from 'lottie-react-native';
 export default function MenuJadwal4({ navigation, route }) {
-    const [loading0, setLoading0] = useState(true);
+    const [loading0, setLoading0] = useState(false);
     const [pilihhari, setpilihhari] = useState({
         1: true,
         2: false,
         3: false,
+    });
+
+    const [pilihLokasi, setPilihLokasi] = useState({
+        1: true,
+        2: false,
     });
     const [kirim, setKirim] = useState(route.params);
     const [loading, setLoading] = useState(false);
@@ -95,13 +100,14 @@ export default function MenuJadwal4({ navigation, route }) {
             })
             pivot.add(7, 'days')
         }
-        axios.post('https://ceysa.zavalabs.com/api/1booked.php').then(res => {
-            console.warn(res.data);
-            res.data.map(i => {
-                dates[i.tanggal] = disabled
-            });
-            setLoading0(false)
-        })
+
+        // axios.post('https://ceysa.zavalabs.com/api/1booked.php').then(res => {
+        //     console.warn(res.data);
+        //     res.data.map(i => {
+        //         dates[i.tanggal] = disabled
+        //     });
+        // setLoading0(false)
+        // })
 
         return dates
     }
@@ -207,6 +213,111 @@ export default function MenuJadwal4({ navigation, route }) {
                 padding: 10,
                 flex: 1,
             }}>
+
+                {/* lokasi */}
+                <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: colors.border,
+                    paddingVertical: 10,
+                }}>
+                    <Text style={{
+                        fontFamily: fonts.secondary[600],
+                        fontSize: windowWidth / 30,
+                        color: colors.black,
+                    }}>Pilihan lokasi untuk kursus : </Text>
+                    <View style={{
+                        paddingVertical: 10,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around'
+                    }}>
+                        <TouchableOpacity onPress={() => {
+                            setPilihLokasi({
+                                1: true,
+                                2: false,
+                            });
+                            setKirim({
+                                ...kirim,
+                                lokasi: 'curug'
+                            });
+
+
+                        }
+                        } style={{
+                            flex: 1,
+                            borderWidth: 1,
+                            borderColor: pilihLokasi[1] ? colors.primary : colors.border,
+                            flexDirection: 'row',
+                            margin: 5,
+                            padding: 0,
+
+                        }}>
+                            <View style={{
+                                width: '20%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: pilihLokasi[1] ? colors.primary : colors.border,
+                            }}>
+                                {pilihLokasi[1] && <Icon type='ionicon' name='checkbox' color={colors.white} size={windowWidth / 30} />}
+
+                            </View>
+
+                            <Text style={{
+                                margin: 10,
+                                textAlign: 'center',
+                                fontFamily: fonts.secondary[600],
+                                fontSize: windowWidth / 35,
+                            }}>Curug</Text>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity onPress={() => {
+                            setPilihLokasi({
+                                1: false,
+                                2: true,
+                            });
+                            setKirim({
+                                ...kirim,
+                                lokasi: 'Serpong',
+                            })
+
+
+                        }
+
+
+
+                        } style={{
+                            flex: 1,
+                            borderWidth: 1,
+                            borderColor: pilihLokasi[2] ? colors.primary : colors.border,
+                            flexDirection: 'row',
+                            margin: 5,
+                            padding: 0,
+
+                        }}>
+                            <View style={{
+                                width: '20%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: pilihLokasi[2] ? colors.primary : colors.border,
+                            }}>
+                                {pilihLokasi[2] && <Icon type='ionicon' name='checkbox' color={colors.white} size={windowWidth / 30} />}
+
+                            </View>
+
+                            <Text style={{
+                                margin: 10,
+                                textAlign: 'center',
+                                fontFamily: fonts.secondary[600],
+                                fontSize: windowWidth / 35,
+                            }}>Serpong</Text>
+                        </TouchableOpacity>
+
+
+                    </View>
+                </View>
+
+                {/* hari */}
+
                 <View style={{
                     borderBottomWidth: 1,
                     borderBottomColor: colors.border,
@@ -355,6 +466,9 @@ export default function MenuJadwal4({ navigation, route }) {
                 </View>
 
                 {/* jumlah pilihan */}
+
+
+
 
 
 

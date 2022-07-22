@@ -61,6 +61,7 @@ import {
   MenuJadwal4,
   MenuJadwal6,
   MenuJadwal8,
+  MenuTransmisi,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -146,6 +147,14 @@ export default function Router() {
       <Stack.Screen
         name="MenuJadwal8"
         component={MenuJadwal8}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuTransmisi"
+        component={MenuTransmisi}
         options={{
           headerShown: false,
         }}
