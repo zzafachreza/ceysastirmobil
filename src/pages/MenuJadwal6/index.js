@@ -26,8 +26,18 @@ import { Icon } from 'react-native-elements';
 import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars';
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
+import { Alert } from 'react-native';
+import { Modalize } from 'react-native-modalize';
 
 export default function MenuJadwal6({ navigation, route }) {
+
+    const modalizeRef = useRef();
+    const onOpen = () => {
+        modalizeRef.current?.open();
+    };
+
+
+
     const [pilihLokasi, setPilihLokasi] = useState({
         1: true,
         2: false,
@@ -451,7 +461,39 @@ export default function MenuJadwal6({ navigation, route }) {
 
                 {/* jumlah pilihan */}
 
-
+                {/* reset date */}
+                <TouchableOpacity onPress={() => {
+                    Alert.alert('Ceysa Stir Handal', 'Apalah kamu akan atur ulang tanggal ?', [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        {
+                            text: "OK", onPress: () => {
+                                setMarkedDates(getDaysInMonth(moment().month(), moment().year(), kirim.tutup));
+                            }
+                        }
+                    ])
+                }} style={{
+                    alignSelf: 'flex-end',
+                    paddingHorizontal: 20,
+                    backgroundColor: colors.black,
+                    width: 130,
+                    height: 30,
+                    marginVertical: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'row'
+                }}>
+                    <Icon size={windowWidth / 25} type='ionicon' name='refresh' color={colors.white} />
+                    <Text style={{
+                        left: 5,
+                        color: colors.white,
+                        fontSize: windowWidth / 30
+                    }}>Reset Tanggal</Text>
+                </TouchableOpacity>
+                {/* reset date */}
 
                 <ScrollView>
 
@@ -475,14 +517,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[0] = d.dateString
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[0] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -517,14 +567,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[1] = d.dateString
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[1] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -559,14 +617,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[2] = d.dateString
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[2] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
+
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -601,15 +667,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[3] = d.dateString
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[3] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
 
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -646,15 +719,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[4] = d.dateString
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[4] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
 
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -690,15 +770,22 @@ export default function MenuJadwal6({ navigation, route }) {
 
 
                                 d => {
-                                    var __tanggal = kirim.tanggal_pertemuan;
-                                    __tanggal[5] = d.dateString
+                                    if (markedDates[d.dateString] == null) {
+                                        var __tanggal = kirim.tanggal_pertemuan;
+                                        __tanggal[5] = d.dateString
+                                        setKirim({
+                                            ...kirim,
+                                            tanggal_pertemuan: __tanggal
+                                        })
+                                        const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
 
-                                    setKirim({
-                                        ...kirim,
-                                        tanggal_pertemuan: __tanggal
-                                    })
-                                    const zvl = { ...markedDates, [d.dateString]: { selected: true, selectedColor: colors.primary } }
-                                    setMarkedDates(zvl)
+
+                                        setMarkedDates(zvl)
+                                    } else {
+
+                                        Alert.alert('Ceysa Stir Handal', 'Maaf pilihan hari tidak sesuai !')
+
+                                    }
                                 }
                             }
                             markedDates={markedDates}
@@ -724,8 +811,250 @@ export default function MenuJadwal6({ navigation, route }) {
             </View>
 
 
+            <Modalize
+                withHandle={false}
+                scrollViewProps={{ showsVerticalScrollIndicator: false }}
+                snapPoint={windowHeight / 1.5}
+                HeaderComponent={
+                    <View style={{ padding: 10, flexDirection: 'column' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ flex: 1, justifyContent: 'center' }}>
+                                <Text
+                                    style={{
+                                        fontFamily: fonts.primary.normal,
+                                        fontSize: windowWidth / 20,
+                                        color: colors.black,
+                                    }}>
+                                    Konfirmasi Booking Kursus
+                                </Text>
+                                <Text
+                                    style={{
+                                        fontFamily: fonts.primary[400],
+                                        fontSize: windowWidth / 30,
+                                        color: colors.black,
+                                    }}>
+                                    Tolong periksa kembali pesananmu sebelum checkout
+                                </Text>
+                            </View>
+                            <TouchableOpacity onPress={() => modalizeRef.current.close()}>
+                                <Icon type="ionicon" name="close-outline" size={35} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                }
 
-            {!loading && <MyButton onPress={sendServer} Icons="calendar-outline" radius={0} title="Booking Jadwal Sekarang" warna={colors.primary} />}
+                ref={modalizeRef} >
+                <View style={{ flex: 1, padding: 10, }}>
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Transmisi</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.transmisi}</Text>
+                    </View>
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Kelas</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.kelas}</Text>
+                    </View>
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Paket</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.paket}</Text>
+                    </View>
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-1</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[0]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[0]}</Text></Text>
+                    </View>
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-2</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[1]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[1]}</Text></Text>
+                    </View>
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-3</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[2]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[2]}</Text></Text>
+                    </View>
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-4</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[3]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[3]}</Text></Text>
+                    </View>
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-5</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[4]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[4]}</Text></Text>
+                    </View>
+
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <Text style={{
+                            flex: 0.6,
+                            fontFamily: fonts.secondary[600],
+                            fontSize: windowWidth / 28
+                        }}>Pertemuan ke-6</Text>
+                        <Text style={{
+                            flex: 1,
+                            fontFamily: fonts.secondary[400],
+                            fontSize: windowWidth / 28
+                        }}>{kirim.tanggal_pertemuan[5]} / <Text style={{
+                            color: colors.primary,
+                            left: 5,
+                            paddingHorizontal: 5,
+                        }}>{kirim.jam_pertemuan[5]}</Text></Text>
+                    </View>
+
+                    <View style={{
+                        borderBottomWidth: 1,
+                        borderBottomColor: colors.border,
+                        flexDirection: 'row',
+                        paddingVertical: 10,
+                    }}>
+                        <View style={{
+                            flex: 1,
+                            paddingRight: 10,
+                        }}>
+                            <MyButton onPress={() => modalizeRef.current.close()} Icons="close-outline" title="Batal" radius={0} warna={colors.danger} />
+                        </View>
+                        <View style={{
+                            flex: 1,
+                            paddingLeft: 10,
+                        }}>
+                            {loading && <ActivityIndicator size="large" color={colors.primary} />}
+                            {!loading && <MyButton onPress={sendServer} Icons="calendar-outline" radius={0} title="Booking Sekarang" warna={colors.primary} />}
+                        </View>
+                    </View>
+
+                </View>
+            </Modalize >
+
+
+            {!loading && <MyButton onPress={onOpen} Icons="calendar-outline" radius={0} title="Booking Jadwal Sekarang" warna={colors.primary} />}
             {loading && <ActivityIndicator size="large" color={colors.primary} />}
         </SafeAreaView >
     )
