@@ -32,6 +32,10 @@ import { Modalize } from 'react-native-modalize';
 
 
 export default function MenuJadwal4({ navigation, route }) {
+
+    const booked = route.params.booking;
+
+
     const [loading0, setLoading0] = useState(false);
     const [pilihhari, setpilihhari] = useState({
         1: true,
@@ -45,7 +49,8 @@ export default function MenuJadwal4({ navigation, route }) {
     });
     const [kirim, setKirim] = useState(route.params);
     const [loading, setLoading] = useState(false);
-    const [booking, setBooking] = useState([]);
+
+
 
 
     const modalizeRef = useRef();
@@ -127,6 +132,10 @@ export default function MenuJadwal4({ navigation, route }) {
     const [markedDates, setMarkedDates] = useState(getDaysInMonth(moment().month(), moment().year(), kirim.tutup))
     const INITIAL_DATE = moment().format('YYYY-MM-DD');
     const jam = [
+        {
+            label: '',
+            value: ''
+        },
         {
             label: '08:00 - 09.30',
             value: '08:00 - 09.30'
@@ -563,11 +572,19 @@ export default function MenuJadwal4({ navigation, route }) {
                         />
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
-                            __jam[0] = x
-                            setKirim({
-                                ...kirim,
-                                jam_pertemuan: __jam
-                            })
+
+                            var __tanggal = kirim.tanggal_pertemuan;
+                            if (x === booked[0].jam_pertemuan && __tanggal[0] === booked[0].tanggal_pertemuan) {
+                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                            } else {
+
+                                __jam[0] = x
+                                setKirim({
+                                    ...kirim,
+                                    jam_pertemuan: __jam
+                                })
+                            }
+
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
@@ -613,11 +630,17 @@ export default function MenuJadwal4({ navigation, route }) {
                         />
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
-                            __jam[1] = x
-                            setKirim({
-                                ...kirim,
-                                jam_pertemuan: __jam
-                            })
+
+                            var __tanggal = kirim.tanggal_pertemuan;
+                            if (x === booked[1].jam_pertemuan && __tanggal[1] === booked[1].tanggal_pertemuan) {
+                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                            } else {
+                                __jam[1] = x
+                                setKirim({
+                                    ...kirim,
+                                    jam_pertemuan: __jam
+                                })
+                            }
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
@@ -663,11 +686,16 @@ export default function MenuJadwal4({ navigation, route }) {
                         />
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
-                            __jam[2] = x
-                            setKirim({
-                                ...kirim,
-                                jam_pertemuan: __jam
-                            })
+                            var __tanggal = kirim.tanggal_pertemuan;
+                            if (x === booked[2].jam_pertemuan && __tanggal[2] === booked[2].tanggal_pertemuan) {
+                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                            } else {
+                                __jam[2] = x
+                                setKirim({
+                                    ...kirim,
+                                    jam_pertemuan: __jam
+                                })
+                            }
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
@@ -713,12 +741,17 @@ export default function MenuJadwal4({ navigation, route }) {
                         />
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
-                            __jam[3] = x
+                            var __tanggal = kirim.tanggal_pertemuan;
+                            if (x === booked[3].jam_pertemuan && __tanggal[3] === booked[3].tanggal_pertemuan) {
+                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                            } else {
+                                __jam[3] = x
 
-                            setKirim({
-                                ...kirim,
-                                jam_pertemuan: __jam
-                            })
+                                setKirim({
+                                    ...kirim,
+                                    jam_pertemuan: __jam
+                                })
+                            }
                         }} label="Waktu belajar" data={jam} />
                     </View>
 

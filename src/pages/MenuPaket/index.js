@@ -24,6 +24,8 @@ import moment from 'moment';
 import LottieView from 'lottie-react-native';
 
 export default function MenuPaket({ navigation, route }) {
+    const [booking, setBooking] = useState([]);
+
 
     // const [kirim, setKirim] = useState({});
     const [loading, setLoading] = useState(false)
@@ -38,7 +40,12 @@ export default function MenuPaket({ navigation, route }) {
     useEffect(() => {
         getData('user').then(user => {
             setUser(user);
-        })
+        });
+
+        axios.post('https://ceysa.zavalabs.com/api/1_jadwal.php').then(res => {
+            setBooking(res.data);
+            console.log(res.data);
+        });
 
     }, [])
 
@@ -164,6 +171,7 @@ export default function MenuPaket({ navigation, route }) {
 
                                 var arr = {
                                     fid_user: user.id,
+                                    booking: booking,
                                     transmisi: route.params.transmisi,
                                     kelas: route.params.kelas,
                                     paket: item.name,
@@ -250,6 +258,7 @@ export default function MenuPaket({ navigation, route }) {
 
                                 var arr = {
                                     fid_user: user.id,
+                                    booking: booking,
                                     transmisi: route.params.transmisi,
                                     kelas: route.params.kelas,
                                     paket: item.name,
