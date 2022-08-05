@@ -574,16 +574,25 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __jam = kirim.jam_pertemuan;
 
                             var __tanggal = kirim.tanggal_pertemuan;
-                            if (x === booked[0].jam_pertemuan && __tanggal[0] === booked[0].tanggal_pertemuan) {
-                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
-                            } else {
+                            axios.post(urlAPI + '/1_cek_jadwal.php', {
+                                jam_pertemuan: x,
+                                tanggal_pertemuan: __tanggal[0]
+                            }).then(res => {
+                                console.log(res.data);
+                                if (res.data == 404) {
+                                    Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                                } else {
 
-                                __jam[0] = x
-                                setKirim({
-                                    ...kirim,
-                                    jam_pertemuan: __jam
-                                })
-                            }
+                                    __jam[0] = x
+                                    setKirim({
+                                        ...kirim,
+                                        jam_pertemuan: __jam
+                                    })
+
+                                }
+                            })
+
+
 
                         }} label="Waktu belajar" data={jam} />
                     </View>
@@ -632,15 +641,23 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __jam = kirim.jam_pertemuan;
 
                             var __tanggal = kirim.tanggal_pertemuan;
-                            if (x === booked[1].jam_pertemuan && __tanggal[1] === booked[1].tanggal_pertemuan) {
-                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
-                            } else {
-                                __jam[1] = x
-                                setKirim({
-                                    ...kirim,
-                                    jam_pertemuan: __jam
-                                })
-                            }
+                            axios.post(urlAPI + '/1_cek_jadwal.php', {
+                                jam_pertemuan: x,
+                                tanggal_pertemuan: __tanggal[1]
+                            }).then(res => {
+                                console.log(res.data);
+                                if (res.data == 404) {
+                                    Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                                } else {
+
+                                    __jam[1] = x
+                                    setKirim({
+                                        ...kirim,
+                                        jam_pertemuan: __jam
+                                    })
+
+                                }
+                            })
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
@@ -687,15 +704,23 @@ export default function MenuJadwal4({ navigation, route }) {
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
                             var __tanggal = kirim.tanggal_pertemuan;
-                            if (x === booked[2].jam_pertemuan && __tanggal[2] === booked[2].tanggal_pertemuan) {
-                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
-                            } else {
-                                __jam[2] = x
-                                setKirim({
-                                    ...kirim,
-                                    jam_pertemuan: __jam
-                                })
-                            }
+                            axios.post(urlAPI + '/1_cek_jadwal.php', {
+                                jam_pertemuan: x,
+                                tanggal_pertemuan: __tanggal[2]
+                            }).then(res => {
+                                console.log(res.data);
+                                if (res.data == 404) {
+                                    Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                                } else {
+
+                                    __jam[2] = x
+                                    setKirim({
+                                        ...kirim,
+                                        jam_pertemuan: __jam
+                                    })
+
+                                }
+                            })
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
@@ -742,16 +767,23 @@ export default function MenuJadwal4({ navigation, route }) {
                         <MyPicker onValueChange={(x) => {
                             var __jam = kirim.jam_pertemuan;
                             var __tanggal = kirim.tanggal_pertemuan;
-                            if (x === booked[3].jam_pertemuan && __tanggal[3] === booked[3].tanggal_pertemuan) {
-                                Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
-                            } else {
-                                __jam[3] = x
+                            axios.post(urlAPI + '/1_cek_jadwal.php', {
+                                jam_pertemuan: x,
+                                tanggal_pertemuan: __tanggal[3]
+                            }).then(res => {
+                                console.log(res.data);
+                                if (res.data == 404) {
+                                    Alert.alert('Ceysa Stir Handal', 'Maaf Jam yang anda pilih tidak tersedia, silahkan ganti jam lain !');
+                                } else {
 
-                                setKirim({
-                                    ...kirim,
-                                    jam_pertemuan: __jam
-                                })
-                            }
+                                    __jam[3] = x
+                                    setKirim({
+                                        ...kirim,
+                                        jam_pertemuan: __jam
+                                    })
+
+                                }
+                            })
                         }} label="Waktu belajar" data={jam} />
                     </View>
 
