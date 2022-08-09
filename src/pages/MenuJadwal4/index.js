@@ -56,7 +56,20 @@ export default function MenuJadwal4({ navigation, route }) {
     const modalizeRef = useRef();
 
     const onOpen = () => {
-        modalizeRef.current?.open();
+
+        if (kirim.jam_pertemuan[0] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-1')
+        } else if (kirim.jam_pertemuan[1] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-2')
+        } else if (kirim.jam_pertemuan[2] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-3')
+        } else if (kirim.jam_pertemuan[3] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-4')
+        } else {
+            modalizeRef.current?.open();
+        }
+
+
     };
 
 
@@ -118,13 +131,17 @@ export default function MenuJadwal4({ navigation, route }) {
             pivot.add(7, 'days')
         }
 
-        // axios.post('https://ceysa.zavalabs.com/api/1booked.php').then(res => {
-        //     console.warn(res.data);
-        //     res.data.map(i => {
-        //         dates[i.tanggal] = disabled
-        //     });
-        // setLoading0(false)
-        // })
+
+
+        axios.post('https://ceysa.zavalabs.com/api/1booked.php', {
+            transmisi: kirim.transmisi,
+        }).then(res => {
+            console.warn(res.data);
+            res.data.map(i => {
+                dates[i.tanggal] = { dotColor: 'red', disabled: true, marked: true }
+            });
+            setLoading0(false)
+        })
 
         return dates
     }

@@ -33,7 +33,21 @@ export default function MenuJadwal6({ navigation, route }) {
     const booked = route.params.booking;
     const modalizeRef = useRef();
     const onOpen = () => {
-        modalizeRef.current?.open();
+        if (kirim.jam_pertemuan[0] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-1')
+        } else if (kirim.jam_pertemuan[1] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-2')
+        } else if (kirim.jam_pertemuan[2] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-3')
+        } else if (kirim.jam_pertemuan[3] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-4')
+        } else if (kirim.jam_pertemuan[4] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-5')
+        } else if (kirim.jam_pertemuan[5] == '') {
+            Alert.alert('Ceysa Stir Handal', 'Maaf kamu belum pilih jam pada pertemuan ke-6')
+        } else {
+            modalizeRef.current?.open();
+        }
     };
 
 
@@ -105,6 +119,16 @@ export default function MenuJadwal6({ navigation, route }) {
             })
             pivot.add(7, 'days')
         }
+
+        axios.post('https://ceysa.zavalabs.com/api/1booked.php', {
+            transmisi: kirim.transmisi,
+        }).then(res => {
+            console.warn(res.data);
+            res.data.map(i => {
+                dates[i.tanggal] = { dotColor: 'red', disabled: true, marked: true }
+            });
+            setLoading0(false)
+        })
 
         return dates
     }
@@ -546,7 +570,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[0]
+                                tanggal_pertemuan: __tanggal[0],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -609,7 +634,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[1]
+                                tanggal_pertemuan: __tanggal[1],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -672,7 +698,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[2]
+                                tanggal_pertemuan: __tanggal[2],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -735,7 +762,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[3]
+                                tanggal_pertemuan: __tanggal[3],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -799,7 +827,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[4]
+                                tanggal_pertemuan: __tanggal[4],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -862,7 +891,8 @@ export default function MenuJadwal6({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[5]
+                                tanggal_pertemuan: __tanggal[5],
+                                transmisi: kirim.transmisi
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
