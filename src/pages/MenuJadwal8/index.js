@@ -140,6 +140,10 @@ export default function MenuJadwal8({ navigation, route }) {
     const INITIAL_DATE = moment().format('YYYY-MM-DD');
     const jam = [
         {
+            label: '',
+            value: ''
+        },
+        {
             label: '08:00 - 09.30',
             value: '08:00 - 09.30'
         },
