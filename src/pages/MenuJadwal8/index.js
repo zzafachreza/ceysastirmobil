@@ -30,6 +30,13 @@ import { Alert } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 export default function MenuJadwal8({ navigation, route }) {
+
+    const [pilihMobil, setPilihMobil] = useState({
+        1: true,
+        2: false,
+    });
+
+
     const booked = route.params.booking;
     const modalizeRef = useRef();
     const onOpen = () => {
@@ -239,6 +246,104 @@ export default function MenuJadwal8({ navigation, route }) {
                 padding: 10,
                 flex: 1,
             }}>
+
+                {/* Mobil */}
+                <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: colors.border,
+                    paddingVertical: 10,
+                }}>
+                    <Text style={{
+                        fontFamily: fonts.secondary[600],
+                        fontSize: windowWidth / 30,
+                        color: colors.black,
+                    }}>Pilihan Mobil untuk kursus : </Text>
+                    <View style={{
+                        paddingVertical: 10,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around'
+                    }}>
+                        <TouchableOpacity onPress={() => {
+                            setPilihMobil({
+                                1: true,
+                                2: false,
+                            });
+                            setKirim({
+                                ...kirim,
+                                mobil: 'Mobil 1'
+                            });
+
+
+                        }
+                        } style={{
+                            flex: 1,
+                            borderWidth: 1,
+                            borderColor: pilihMobil[1] ? colors.primary : colors.border,
+                            flexDirection: 'row',
+                            margin: 5,
+                            padding: 0,
+
+                        }}>
+                            <View style={{
+                                width: '20%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: pilihMobil[1] ? colors.primary : colors.border,
+                            }}>
+                                {pilihMobil[1] && <Icon type='ionicon' name='checkbox' color={colors.white} size={windowWidth / 30} />}
+
+                            </View>
+
+                            <Text style={{
+                                margin: 10,
+                                textAlign: 'center',
+                                fontFamily: fonts.secondary[600],
+                                fontSize: windowWidth / 35,
+                            }}>Mobil 1</Text>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity onPress={() => {
+                            setPilihMobil({
+                                1: false,
+                                2: true,
+                            });
+                            setKirim({
+                                ...kirim,
+                                mobil: 'Mobil 2',
+                            })
+
+
+                        }
+
+                        } style={{
+                            flex: 1,
+                            borderWidth: 1,
+                            borderColor: pilihMobil[2] ? colors.primary : colors.border,
+                            flexDirection: 'row',
+                            margin: 5,
+                            padding: 0,
+
+                        }}>
+                            <View style={{
+                                width: '20%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: pilihMobil[2] ? colors.primary : colors.border,
+                            }}>
+                                {pilihMobil[2] && <Icon type='ionicon' name='checkbox' color={colors.white} size={windowWidth / 30} />}
+
+                            </View>
+
+                            <Text style={{
+                                margin: 10,
+                                textAlign: 'center',
+                                fontFamily: fonts.secondary[600],
+                                fontSize: windowWidth / 35,
+                            }}>Mobil 2</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
                 {/* lokasi */}
                 <View style={{

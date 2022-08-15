@@ -172,6 +172,7 @@ export default function MenuPaket({ navigation, route }) {
                                 var arr = {
                                     fid_user: user.id,
                                     lokasi: 'Curug',
+                                    mobil: 'Mobil 1',
                                     booking: booking,
                                     transmisi: route.params.transmisi,
                                     kelas: route.params.kelas,
@@ -260,6 +261,7 @@ export default function MenuPaket({ navigation, route }) {
                                 var arr = {
                                     fid_user: user.id,
                                     lokasi: 'Curug',
+                                    mobil: 'Mobil 1',
                                     booking: booking,
                                     transmisi: route.params.transmisi,
                                     kelas: route.params.kelas,
