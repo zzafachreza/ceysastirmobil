@@ -145,6 +145,7 @@ export default function MenuJadwal4({ navigation, route }) {
 
         axios.post('https://ceysa.zavalabs.com/api/1booked.php', {
             transmisi: kirim.transmisi,
+            mobil: kirim.mobil
         }).then(res => {
             console.warn(res.data);
             res.data.map(i => {
@@ -330,8 +331,6 @@ export default function MenuJadwal4({ navigation, route }) {
 
 
                         }
-
-
 
                         } style={{
                             flex: 1,
@@ -703,7 +702,8 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[0]
+                                tanggal_pertemuan: __tanggal[0],
+                                mobil: kirim.mobil
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -770,7 +770,8 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[1]
+                                tanggal_pertemuan: __tanggal[1],
+                                mobil: kirim.mobil
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -833,7 +834,8 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[2]
+                                tanggal_pertemuan: __tanggal[2],
+                                mobil: kirim.mobil
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
@@ -896,7 +898,8 @@ export default function MenuJadwal4({ navigation, route }) {
                             var __tanggal = kirim.tanggal_pertemuan;
                             axios.post(urlAPI + '/1_cek_jadwal.php', {
                                 jam_pertemuan: x,
-                                tanggal_pertemuan: __tanggal[3]
+                                tanggal_pertemuan: __tanggal[3],
+                                mobil: kirim.mobil
                             }).then(res => {
                                 console.log(res.data);
                                 if (res.data == 404) {
