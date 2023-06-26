@@ -20,4 +20,4 @@ export const getData = async key => {
 };
 
 
-export const urlAPI = 'https://ceysa.zavalabs.com/api';
+export const urlAPI = 'https://admin.ceysastirhandal.com/api';
